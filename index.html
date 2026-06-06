@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Nguyễn Lưu Bảo Long</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0B0F19;
+            --bg-secondary: #161B26;
+            --bg-border: #242C3D;
+            --accent-cyan: #00E5FF;
+            --accent-purple: #8A2BE2;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0f1322 100%);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(600px at 20% 30%, rgba(0, 229, 255, 0.08) 0%, transparent 80%),
+                radial-gradient(800px at 80% 70%, rgba(138, 43, 226, 0.06) 0%, transparent 80%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navbar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--bg-border);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.4s ease-in-out;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-cyan);
+        }
+
+        .tech-stack-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-border);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .tech-stack-toggle:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        section h2 i {
+            color: var(--accent-cyan);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(22, 27, 38, 0.5) 100%);
+            border: 1px solid var(--bg-border);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .about-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .about-card h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Hobbies Grid */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .hobby-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(22, 27, 38, 0.5) 100%);
+            border: 1px solid var(--bg-border);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .hobby-card:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .hobby-card h4 {
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .hobby-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(22, 27, 38, 0.5) 100%);
+            border: 1px solid var(--bg-border);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
+            transform: translateY(-8px);
+        }
+
+        .project-card h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .project-label {
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .project-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .tech-tag:hover {
+            background: rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        /* Conclusion Section */
+        .conclusion-content {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(22, 27, 38, 0.5) 100%);
+            border: 1px solid var(--bg-border);
+            padding: 3rem;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+
+        .conclusion-item {
+            margin-bottom: 2rem;
+        }
+
+        .conclusion-item h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .conclusion-item p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(11, 15, 25, 0.9);
+            border-top: 1px solid var(--bg-border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><i class="fas fa-code"></i> NBL</div>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link active">Giới Thiệu</a></li>
+                <li><a href="#projects" class="nav-link">Dự Án</a></li>
+                <li><a href="#conclusion" class="nav-link">Kết Luận</a></li>
+            </ul>
+            <button class="tech-stack-toggle"><i class="fas fa-cogs"></i> Tech Stack</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Nguyễn Lưu Bảo Long</h1>
+            <p>Kỹ Sư Công Nghệ - Sinh Viên UET, VNU</p>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2><i class="fas fa-user"></i> Giới Thiệu Về Tôi</h2>
+            
+            <div class="about-content">
+                <div class="about-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Thông Tin Cơ Bản</h3>
+                    <p><strong>Họ Tên:</strong> Nguyễn Lưu Bảo Long</p>
+                    <p><strong>Trường:</strong> Đại học Công nghệ – Đại học Quốc gia Hà Nội (UET - VNU)</p>
+                    <p><strong>Ngành:</strong> Công nghệ kỹ thuật điện tử viễn thông</p>
+                    <p><strong>Cung Hoàng Đạo:</strong> Bảo Bình ♒</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-bullseye"></i> Mục Tiêu Portfolio</h3>
+                    <p>🎯 <strong>Minh Chứng Kỹ Năng Số:</strong> Thể hiện khả năng công nghệ và sáng tạo</p>
+                    <p>📚 <strong>Không Gian Lưu Trữ:</strong> Hệ thống hóa chặng đường học tập</p>
+                    <p>🤝 <strong>Kết Nối & Chia Sẻ:</strong> Chia sẻ trải nghiệm và kiến thức</p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-cyan); margin: 3rem 0 1rem 0;">Sở Thích</h3>
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <h4><i class="fas fa-utensils"></i> Nấu Ăn</h4>
+                    <p>Mình yêu thích việc tìm tòi công thức mới và tự tay chuẩn bị những món ăn ngon. Đối với mình, nấu ăn không chỉ là một kỹ năng chăm sóc bản thân và gia đình, mà còn là không gian để mình thư giãn và sáng tạo sau những giờ học căng thẳng.</p>
+                </div>
+
+                <div class="hobby-card">
+                    <h4><i class="fas fa-music"></i> Âm Nhạc (Đàn & Hát)</h4>
+                    <p>Âm nhạc là một phần không thể thiếu trong cuộc sống của mình. Mình thích tự đàn, tự hát những giai điệu yêu thích — đây là cách tuyệt vời nhất để mình nuôi dưỡng cảm xúc, lan tỏa năng lượng tích cực và kết nối với mọi người xung quanh.</p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--accent-cyan); margin: 3rem 0 1rem 0;">Mục Tiêu Học Tập & Định Hướng Phát Triển</h3>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3><i class="fas fa-rocket"></i> Mục Tiêu Ngắn Hạn</h3>
+                    <p>✓ Nắm vững kiến thức nền tảng về đại số tuyến tính, vật lý đại cương và kỹ thuật điện tử</p>
+                    <p>✓ Trau dồi tiếng Anh chuyên ngành và giao tiếp</p>
+                    <p>✓ Tham gia ngoại khóa/CLB tại UET</p>
+                </div>
+
+                <div class="about-card">
+                    <h3><i class="fas fa-star"></i> Định Hướng Dài Hạn</h3>
+                    <p>✓ Trở thành Kỹ sư Điện tử và Viễn thông chuyên nghiệp</p>
+                    <p>✓ Nghiên cứu và thiết kế hệ thống vi mạch</p>
+                    <p>✓ Phát triển công nghệ nhúng thông minh chuẩn quốc tế</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram"></i> Các Dự Án & Bài Tập</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Bài 1: Máy Tính và Các Thiết Bị Ngoại Vi</h3>
+                    <p class="project-label"><i class="fas fa-flag"></i> Mục Tiêu:</p>
+                    <p class="project-text">Tìm hiểu cấu tạo, nguyên lý hoạt động của máy tính và các thiết bị ngoại vi.</p>
+                    <p class="project-label"><i class="fas fa-cogs"></i> Quá Trình:</p>
+                    <p class="project-text">Nghiên cứu tài liệu, tổng hợp thông tin, tạo tài liệu trình bày.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag"><i class="fas fa-file-word"></i> Word</span>
+                        <span class="tech-tag"><i class="fas fa-presentation"></i> PowerPoint</span>
+                        <span class="tech-tag"><i class="fas fa-project-diagram"></i> Draw.io</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Bài 2: Khai Thác Dữ Liệu và Thông Tin</h3>
+                    <p class="project-label"><i class="fas fa-flag"></i> Mục Tiêu:</p>
+                    <p class="project-text">Tìm kiếm và khai thác thông tin từ các nguồn dữ liệu đáng tin cây.</p>
+                    <p class="project-label"><i class="fas fa-cogs"></i> Quá Trình:</p>
+                    <p class="project-text">Sử dụng các công cụ tìm kiếm nâng cao, phân tích và tổng hợp dữ liệu.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag"><i class="fas fa-google"></i> Google Search</span>
+                        <span class="tech-tag"><i class="fas fa-book"></i> Google Scholar</span>
+                        <span class="tech-tag"><i class="fas fa-file-word"></i> MS Word</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Bài 3: Tổng Quan Về Trí Tuệ Nhân Tạo</h3>
+                    <p class="project-label"><i class="fas fa-flag"></i> Mục Tiêu:</p>
+                    <p class="project-text">Nắm bắt khái niệm, ứng dụng, và tầm quan trọng của AI trong xã hội.</p>
+                    <p class="project-label"><i class="fas fa-cogs"></i> Quá Trình:</p>
+                    <p class="project-text">Nghiên cứu, tham khảo AI tools, tạo bài trình bày chi tiết.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag"><i class="fas fa-brain"></i> ChatGPT</span>
+                        <span class="tech-tag"><i class="fas fa-robot"></i> Gemini</span>
+                        <span class="tech-tag"><i class="fas fa-presentation"></i> PowerPoint</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Bài 4: Giao Tiếp & Hợp Tác Số</h3>
+                    <p class="project-label"><i class="fas fa-flag"></i> Mục Tiêu:</p>
+                    <p class="project-text">Thành thạo các công cụ giao tiếp và quản lý dự án trong môi trường số.</p>
+                    <p class="project-label"><i class="fas fa-cogs"></i> Quá Trình:</p>
+                    <p class="project-text">Sử dụng Google Workspace, MS Teams, Trello, Notion cho hợp tác nhóm.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag"><i class="fas fa-envelope"></i> Google Workspace</span>
+                        <span class="tech-tag"><i class="fas fa-comments"></i> MS Teams</span>
+                        <span class="tech-tag"><i class="fas fa-tasks"></i> Trello</span>
+                        <span class="tech-tag"><i class="fas fa-book"></i> Notion</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Bài 5: Sáng Tạo Nội Dung Số</h3>
+                    <p class="project-label"><i class="fas fa-flag"></i> Mục Tiêu:</p>
+                    <p class="project-text">Phát triển kỹ năng thiết kế đồ họa, chỉnh sửa video, và tạo nội dung sáng tạo.</p>
+                    <p class="project-label"><i class="fas fa-cogs"></i> Quá Trình:</p>
+                    <p class="project-text">Sử dụng các công cụ thiết kế để tạo ra nội dung hấp dẫn và chuyên nghiệp.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag"><i class="fas fa-palette"></i> Canva</span>
+                        <span class="tech-tag"><i class="fas fa-video"></i> CapCut</span>
+                        <span class="tech-tag"><i class="fas fa-image"></i> Photoshop</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Bài 6: An Toàn & Liêm Chính Học Thuật</h3>
+                    <p class="project-label"><i class="fas fa-flag"></i> Mục Tiêu:</p>
+                    <p class="project-text">Hiểu rõ các nguyên tắc an toàn thông tin và liêm chính học thuật.</p>
+                    <p class="project-label"><i class="fas fa-cogs"></i> Quá Trình:</p>
+                    <p class="project-text">Nghiên cứu tài liệu, tham khảo các nguồn đáng tin cây, tuân thủ quy tắc trích dẫn.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag"><i class="fas fa-book"></i> Google Scholar</span>
+                        <span class="tech-tag"><i class="fas fa-bookmark"></i> Zotero</span>
+                        <span class="tech-tag"><i class="fas fa-file-word"></i> MS Word</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section id="conclusion">
+            <h2><i class="fas fa-lightbulb"></i> Kết Luận & Nhân Xét</h2>
+            
+            <div class="conclusion-content">
+                <div class="conclusion-item">
+                    <h3>📝 Trải Nghiệm</h3>
+                    <p>Tự hào và biết ơn khi tự tay xây dựng không gian số để hệ thống hóa chặng đường học tập. Quá trình này không chỉ giúp mình ghi nhớ lại những gì đã làm, mà còn là dịp để mình trưng bày nỗ lực và sáng tạo của bản thân với cộng đồng.</p>
+                </div>
+
+                <div class="conclusion-item">
+                    <h3>😅 Cảm Xúc</h3>
+                    <p>Mệt mỏi vì sửa lỗi giao diện/code, nhưng khi thấy sản phẩm hiển thị chỉn chu thì mọi thứ đều xứng đáng. Từng pixel, từng dòng code đều đại diện cho sự kiên trì và tình yêu với công nghệ.</p>
+                </div>
+
+                <div class="conclusion-item">
+                    <h3>🎓 Kiến Thức Đạt Được</h3>
+                    <p><strong>Kỹ Năng Công Nghệ & Số:</strong> HTML, CSS, JavaScript, các công cụ thiết kế, quản lý dự án số</p>
+                    <p><strong>Tư Duy & Học Thuật:</strong> Liêm chính học thuật, tránh đạo văn, trích dẫn chính xác</p>
+                    <p><strong>Kỹ Năng Mềm:</strong> Tự học, quản lý thời gian, làm việc nhóm, giao tiếp hiệu quả</p>
+                </div>
+
+                <div class="conclusion-item">
+                    <h3>💎 Tâm Đắc & Thách Thức</h3>
+                    <p><strong>Tâm Đắc:</strong> Tạo ra sản phẩm có dấu ấn cá nhân, phản ánh giá trị và tầm nhìn của bản thân</p>
+                    <p><strong>Thách Thức Lớn Nhất:</strong> Tối ưu CSS Layout (fix lỗi font, lệch khung) và chắt lọc nội dung để logic rõ ràng, súc tích</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Nguyễn Lưu Bảo Long | Portfolio Website - UET VNU</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Xây dựng với ❤️ bằng HTML, CSS, và JavaScript</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling and active link highlighting
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Tech stack toggle
+        const techStackToggle = document.querySelector('.tech-stack-toggle');
+        techStackToggle.addEventListener('click', function() {
+            const techTags = document.querySelectorAll('.tech-tags');
+            techTags.forEach(tag => {
+                tag.style.display = tag.style.display === 'none' ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
